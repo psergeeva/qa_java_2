@@ -39,14 +39,16 @@ public class LionTest {
 
     }
 
-    @Test(expected = AssertionError.class)
-    public void checkExceptionMessage() throws AssertionError {
+    @Test
+    public void constructorThrowsExceptionOnNullTitle() throws Exception {
+        Exception exception = null;
         try {
-            Lion lion = new Lion("12", feline);
-            Assert.fail("Expected AssertionError");
+            Lion lion = new Lion(null, feline);
+        } catch (Exception ex) {
+            exception = ex;
         }
-        catch (Exception thrown) {
-            Assert.assertNotEquals("Используйте допустимые значения пола животного - самец или самка", thrown.getMessage());
-        }
+
+        assertNotNull(exception);
+        assertEquals("Используйте допустимые значения пола животного - самец или самка",exception.getMessage());
     }
 }
